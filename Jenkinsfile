@@ -7,13 +7,6 @@ pipeline {
 
   agent any
 
-  stages {
-
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/devopsni3/nodeapp.git'
-      }
-    }
 
     stage('Build image') {
       steps{
