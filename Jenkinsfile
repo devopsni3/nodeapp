@@ -1,17 +1,22 @@
 pipeline {
-    agent any
+
   environment {
     dockerimagename = "ni3devops/nodeapp-test"
     dockerImage = ""
   }
-  stage('Build image') {
+
+  agent any
+
+  stages {
+    stage('Build image') {
       steps{
         script {
           dockerImage = docker.build dockerimagename
         }
       }
     }
-  stage('Pushing Image') {
+
+    stage('Pushing Image') {
       environment {
                registryCredential = 'docker-cred'
            }
@@ -23,7 +28,8 @@ pipeline {
         }
       }
     }
-  stage('Deploying App to Kubernetes') {
+
+    stage('Deploying App to Kubernetes') {
       steps {
         script {
           kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
@@ -32,3 +38,5 @@ pipeline {
     }
 
   }
+
+}
