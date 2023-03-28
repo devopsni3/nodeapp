@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "ni3devops/nodeapp"
+    dockerimagename = "ni3devops/nodeapp-test"
     dockerImage = ""
   }
 
@@ -25,7 +25,7 @@ pipeline {
 
     stage('Pushing Image') {
       environment {
-               registryCredential = 'dockerhublogin'
+               registryCredential = 'docker-cred'
            }
       steps{
         script {
